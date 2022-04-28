@@ -1,0 +1,3 @@
+server/dockers/mysql-data
+server/src/__pycache__
+server/src/models/__pycache__
