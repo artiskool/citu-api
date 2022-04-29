@@ -12,7 +12,7 @@ def home():
     return "Hello Flask!"
 
 @app.route('/dogs', methods=['POST', 'GET', 'PUT', 'DELETE'])
-def dogs():
+def get_dogs():
     dog = Dog()
     if str(request.method).upper() == 'POST':
         resp = dog.post(request.json)
@@ -29,7 +29,7 @@ def dogs():
     return jsonify(dogs)
 
 @app.route('/dogs/<dog_id>', methods=['GET', 'PUT', 'DELETE'])
-def dog(dog_id):
+def get_dog(dog_id):
     dog_object = Dog()
     dog = dog_object.get({"id": dog_id})
     if dog is None:
