@@ -5,7 +5,7 @@ from v1.cat.router import CatRouter
 app = Flask(__name__)
 
 bp_dogs = Blueprint('dogs', __name__, url_prefix='/v1/dogs')
-bp_cats = Blueprint('cats',__name__, ulr_prefix='/v1/cats')
+bp_cats = Blueprint('cats',__name__, url_prefix='/v1/cats')
 DogRouter.handler(bp_dogs)
 CatRouter.handler(bp_cats)
 app.register_blueprint(bp_dogs)
