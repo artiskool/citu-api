@@ -1,7 +1,6 @@
-from flask import g
 from db import Db
 
-class Cat():
+class CatModel():
     def sanitize(self, cats):
         if not isinstance(cats, (list, tuple)):
             cats = [cats]
@@ -14,7 +13,7 @@ class Cat():
             clean_cats.append(cat)
         return clean_cats
 
-    def post(self, cats):
+    def create(self, cats):
         if not isinstance(cats, (list, tuple)):
             cats = [cats]
         clean_cats = self.sanitize(cats)
@@ -28,7 +27,7 @@ class Cat():
         result = db.transactional(queries)
         return cats
 
-    def get(self, filters=None):
+    def read(self, filters=None):
         db = Db.get_instance()
         if filters is not None:
             if 'id' in filters:
@@ -40,7 +39,7 @@ class Cat():
         cats = db.fetchall(sql)
         return cats
 
-    def put(self, cats):
+    def update(self, cats):
         if not isinstance(cats, (list, tuple)):
             cats = [cats]
         clean_cats = self.sanitize(cats)
