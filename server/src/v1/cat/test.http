@@ -9,7 +9,7 @@ Content-Type: application/json
 
 {
     "id": 0,
-    "name": "Mingming"
+    "name": "Moe"
 }
 
 
@@ -18,7 +18,7 @@ PUT {{host}}/ HTTP/1.1
 Content-Type: application/json
 
 {
-    "id": 19,
+    "id": 8,
     "name": "Meow"
 }
 
@@ -27,21 +27,21 @@ Content-Type: application/json
 DELETE {{host}}/ HTTP/1.1
 Content-Type: application/json
 
-[21,23,12,16,17]
+[7]
 
 
 
 ###
-GET {{host}}/22 HTTP/1.1
+GET {{host}}/5 HTTP/1.1
 
 
 ###
-PUT {{host}}/22 HTTP/1.1
+PUT {{host}}/5 HTTP/1.1
 Content-Type: application/json
 
 {
   "id": 0, 
-  "name": "Whitie"
+  "name": "Kimi"
 }
 
 

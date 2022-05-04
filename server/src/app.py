@@ -10,3 +10,6 @@ DogRouter.handler(bp_dogs)
 CatRouter.handler(bp_cats)
 app.register_blueprint(bp_dogs)
 app.register_blueprint(bp_cats)
+
+if __name__ == "__main__":
+    app.run(debug=True, host='0.0.0.0', port=6000)
