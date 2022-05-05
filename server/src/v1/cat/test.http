@@ -1,0 +1,30 @@
+@host = http://127.0.0.1:6000/v1/cats
+
+GET {{host}}/ HTTP/1.1
+
+
+###
+POST {{host}}/ HTTP/1.1
+Content-Type: application/json
+
+{
+    "id": 9,
+    "name": "Jo"
+}
+
+
+###
+PUT {{host}}/ HTTP/1.1
+Content-Type: application/json
+
+{
+    "id": 8,
+    "name": "Dora"
+}
+
+
+###
+DELETE {{host}}/ HTTP/1.1
+Content-Type: application/json
+
+[9,10]
