@@ -1,7 +1,8 @@
 from flask import request, make_response, jsonify
+from v1.basecontroller import BaseController
 from v1.dog.model import DogModel
 
-class DogController():
+class DogController(BaseController):
     _instance = None
 
     def __init__(self) -> None:
@@ -16,21 +17,36 @@ class DogController():
             }), 400)
         return jsonify(resp)
 
-    def check(self, dog_id):
-        dog = self._instance.read({"id": dog_id})
+    def check(self, dog_id, filters=None):
+        if filters is not None:
+            filters['id'] = dog_id
+        else:
+            filters = {"id": dog_id}
+        dog = self._instance.read(filters)
         if dog is None:
             return make_response(jsonify({"error": "Dog id not found."}), 404)
         return dog
 
     def get(self, dog_id=None):
+        filters = {}
+        if 'fields' in request.args:
+            filters['fields'] = request.args['fields'].split(',')
         if dog_id is not None:
-            dog = self.check(dog_id)
+            dog = self.check(dog_id, filters)
             if not isinstance(dog, dict):
-
                 return dog
             return jsonify(dog)
-        dogs = self._instance.read()
-        return jsonify(dogs)
+        filters['offset'] = int(request.args['offset']) if 'offset' in request.args else 0
+        filters['limit'] = int(request.args['limit']) if 'limit' in request.args else 5
+        dogs = self._instance.read(filters)
+        total = self._instance.read(filters, True)
+        return jsonify({
+            'metadata': {
+                'total': total,
+                'links': self.build_links(total, filters['offset'], filters['limit'])
+            },
+            'data': dogs
+        })
 
     def put(self, dog_id=None):
         if dog_id is not None:
