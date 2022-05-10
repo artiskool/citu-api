@@ -1,4 +1,3 @@
-from math import ceil
 from flask import request
 
 class BaseController():
@@ -23,7 +22,7 @@ class BaseController():
             new_offset = offset - limit
             if new_offset < 0:
                 new_offset = 0
-            links['previous'] = url.replace(
+            links['prev'] = url.replace(
                 'offset='+str(offset),
                 'offset='+str(new_offset)
             )

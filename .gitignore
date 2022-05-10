@@ -3,3 +3,4 @@ server/src/__pycache__
 server/src/models/__pycache__
 server/src/v1/cat/__pycache__
 server/src/v1/dog/__pycache__
+server/src/v1/__pycache__

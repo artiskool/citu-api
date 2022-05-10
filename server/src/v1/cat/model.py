@@ -27,17 +27,36 @@ class CatModel():
         result = db.transactional(queries)
         return cats
 
-    def read(self, filters=None):
+    def read(self, filters=None, count_only=False):
         db = Db.get_instance()
+        fields = ['*']
+        offset = 0 
+        limit = 5
         if filters is not None:
+            if 'fields' in filters:
+                tmp_fields =[]
+                for field in filters['fields']:
+                    if field in ['id', 'name']:
+                        tmp_fields.append(field)
+                if len(tmp_fields) > 0:
+                    fields=tmp_fields
             if 'id' in filters:
-                sql = "SELECT * FROM cats WHERE id = %s"
+                sql = "SELECT " + ','.join(fields) + " FROM cats WHERE id =%s"
                 cat = db.fetchone(sql, filters['id'])
                 return cat
-            # if another filter
-        sql = "SELECT * FROM cats ORDER BY name"
-        cats = db.fetchall(sql)
-        return cats
+            if 'offset' in filters:
+                offset = int(filters['offset'])
+            if 'limit' in filters:
+                limit = int(filters['limit'])
+        cols = 'COUNT(*) AS total' if count_only else ','.join(fields)
+        sql = "SELECT " + cols + " FROM cats" 
+        if not count_only:
+            sql+= " ORDER BY name LIMIT " + str(offset) + ", " + str(limit)
+        if count_only:
+            row = db.fetchone(sql)
+            return row['total'] if row else 0
+        else:
+            return db.fetchall(sql)
 
     def update(self, cats):
         if not isinstance(cats, (list, tuple)):
