@@ -1,12 +1,26 @@
 import pymysql.cursors
 
 class Db():
+    __instance = None
     connection = None
     hostname = "flask-db"
-    port = "3366"
+    port = "3306"
     username = "root"
     password = "root"
     database = "pets"
+
+    def __init__(self):
+        if Db.__instance is not None:
+            raise Exception("This class is Singleton.")
+        else:
+            Db.__instance = self
+            Db.__instance.connect()
+
+    @staticmethod
+    def get_instance():
+        if Db.__instance is None:
+            Db()
+        return Db.__instance
 
     def connect(self, hostname=None, port=None, username=None, password=None, database=None):
         if hostname is not None:
@@ -51,3 +65,15 @@ class Db():
     def fetchall(self, sql, bind=None):
         cursor = self.query(sql, bind)
         return cursor.fetchall()
+
+    def transactional(self, queries):
+        counter = 0
+        try:
+            for query in queries:
+                counter += self.execute(query['sql'], query['bind'])
+        except:
+            self.connection.rollback()
+            return False
+        else:
+            self.connection.commit()
+            return counter
