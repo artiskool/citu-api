@@ -14,9 +14,9 @@ services:
   db:
     image: mysql:8.0.28
     ports:
-      - "3306:3306"
+      - "3366:3366"
     expose:
-      - "3306"
+      - "3366"
     environment:
       MYSQL_ROOT_PASSWORD: root
     volumes:
