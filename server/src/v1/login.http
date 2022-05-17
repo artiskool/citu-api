@@ -1,0 +1,16 @@
+@host = http://127.0.0.1:6000/v1
+
+
+### Login
+POST {{host}}/login HTTP/1.1
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "password": "admin"
+}
+
+
+### Token verification
+GET {{host}}/verify-token?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWQiOjEwMCwiZXhwIjoxNjUyODUyMDE0fQ.e7fPAyd3kO-0s_QRoUVpR9KcbbjW24e8-7DKBeGv6WI HTTP/1.1
+
