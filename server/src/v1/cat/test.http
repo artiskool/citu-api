@@ -1,11 +1,11 @@
 @host = http://127.0.0.1:6000/v1/cats
 
 ### Get all cats
-GET {{host}}/?fields=name&offset=0&limit=3 HTTP/1.1
+GET {{host}}/?fields=name&offset=0&limit=3&token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWQiOjEwMCwiZXhwIjoxNjUzMDQ2NDc1fQ.qp4FXuhYvsSIf1qPpJ6z8U4WslBd5DYqtH9ees7FScc HTTP/1.1
 
 
 ### Create new cat
-POST {{host}}/ HTTP/1.1
+POST {{host}}/?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWQiOjEwMCwiZXhwIjoxNjUzMDQ2NDc1fQ.qp4FXuhYvsSIf1qPpJ6z8U4WslBd5DYqtH9ees7FScc HTTP/1.1
 Content-Type: application/json
 
 {
