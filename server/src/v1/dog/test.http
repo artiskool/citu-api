@@ -2,11 +2,11 @@
 
 
 ### Get all dogs
-GET {{host}}/?fields=name&offset=0&limit=2 HTTP/1.1
+GET {{host}}/?fields=name&offset=0&limit=2&token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWQiOjEwMCwiZXhwIjoxNjUzMDQ2NDc1fQ.qp4FXuhYvsSIf1qPpJ6z8U4WslBd5DYqtH9ees7FScc HTTP/1.1
 
 
 ### Create new dogs
-POST {{host}}/ HTTP/1.1
+POST {{host}}/?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWQiOjEwMCwiZXhwIjoxNjUzMDQ2NDc1fQ.qp4FXuhYvsSIf1qPpJ6z8U4WslBd5DYqtH9ees7FScc HTTP/1.1
 Content-Type: application/json
 
 {
