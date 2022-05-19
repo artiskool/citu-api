@@ -1,31 +1,31 @@
-@host = http://127.0.0.1:6000/v1/cats
+@host = http://127.0.0.1:6000/v1/users
 
 
-### Get all cats
+### Get all users
 GET {{host}}/?fields=name&offset=0&limit=2&token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWQiOjEwMCwiZXhwIjoxNjUyODUyMDE0fQ.e7fPAyd3kO-0s_QRoUVpR9KcbbjW24e8-7DKBeGv6WI HTTP/1.1
 
 
-### Create new cats
+### Create new users
 POST {{host}}/?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWQiOjEwMCwiZXhwIjoxNjUyODUyMDE0fQ.e7fPAyd3kO-0s_QRoUVpR9KcbbjW24e8-7DKBeGv6WI HTTP/1.1
 Content-Type: application/json
 
 {
     "id": 0,
-    "name": "Blackie5"
+    "name": "Blake"
 }
 
 
-### Update cats
+### Update users
 PUT {{host}}/ HTTP/1.1
-Content-Type: application/json
+Content-Type: appliuserion/json
 
 {
     "id": 19,
-    "name": "Twing"
+    "name": "Steven"
 }
 
 
-### Delete cats
+### Delete users
 DELETE {{host}}/ HTTP/1.1
 Content-Type: application/json
 
@@ -33,19 +33,19 @@ Content-Type: application/json
 
 
 
-### Get single cat
+### Get single user
 GET {{host}}/24?fields=id HTTP/1.1
 
 
-### Update sing cat
+### Update sing user
 PUT {{host}}/22 HTTP/1.1
 Content-Type: application/json
 
 {
   "id": 0, 
-  "name": "Ming"
+  "name": "Reynold"
 }
 
 
-### Delete single cat
+### Delete single user
 DELETE {{host}}/22 HTTP/1.1
