@@ -1,5 +1,8 @@
 from flask import jsonify, request, current_app
+<<<<<<< HEAD
 from v1.user.controller import UserController
+=======
+>>>>>>> e0536e7e8f8b5f0cf8a82865212df0e6cab5cd36
 import jwt
 import datetime
 
