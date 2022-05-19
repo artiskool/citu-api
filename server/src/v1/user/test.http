@@ -1,0 +1,52 @@
+@host = http://127.0.0.1:6000/v1/users
+
+GET {{host}}/?fields=name&offset=0&limit=2 HTTP/1.1
+
+
+### Create
+POST {{host}}/ HTTP/1.1
+Content-Type: application/json
+
+{
+    "id": 0,
+    "username": "Harry Potter",
+    "password": "gryffindor"
+}
+
+
+### Update
+PUT {{host}}/ HTTP/1.1
+Content-Type: application/json
+
+{
+    "id": 6,
+    "username": "Leni Robredo",
+    "password": "kakampink"
+}
+
+
+### Delete cats
+DELETE {{host}}/ HTTP/1.1
+Content-Type: application/json
+
+[10]
+
+
+
+### Get 1
+GET {{host}}/?fields=username HTTP/1.1
+
+
+### Update 1
+PUT {{host}}/ HTTP/1.1
+Content-Type: application/json
+
+{
+  "id": 0, 
+  "username": "Albus Dumbledore",
+  "password": "hogwarts"
+}
+
+
+### Delete 1
+DELETE {{host}}/ HTTP/1.1
