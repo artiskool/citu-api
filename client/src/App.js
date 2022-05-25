@@ -2,7 +2,7 @@ import Register from './components/Register';
 import Login from './components/Login';
 import Home from './components/Home';
 import Layout from './components/Layout';
-import Editor from './components/Editor';
+import Dogs from './components/Dogs';
 import Admin from './components/Admin';
 import Missing from './components/Missing';
 import Unauthorized from './components/Unauthorized';
@@ -34,7 +34,7 @@ function App() {
         </Route>
 
         <Route element={<RequireAuth allowedRoles={[ROLES.Editor]} />}>
-          <Route path="editor" element={<Editor />} />
+          <Route path="dogs" element={<Dogs />} />
         </Route>
 
 
