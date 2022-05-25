@@ -6,7 +6,7 @@ import axios from '../api/axios';
 const LOGIN_URL = '/login';
 
 const Login = () => {
-    const { setAuth } = useAuth();
+    const { setAuth, keepLogin } = useAuth();
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -45,7 +45,12 @@ const Login = () => {
             );
             console.log(typeof(response), response);
             const accessToken = response?.data?.token;
-            setAuth({ user: 2001, pwd, accessToken });
+            if (!accessToken) {
+                throw new Error('Access token not found.');
+            }
+            const userLogin = { user: 2001, pwd, accessToken };
+            setAuth(userLogin);
+            keepLogin(userLogin);
             setUser('');
             setPwd('');
             console.log(from, accessToken);
