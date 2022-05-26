@@ -14,8 +14,10 @@ const useAxiosPrivate = () => {
                 if (!config.headers['Authorization']) {
                     //config.headers['Authorization'] = `Bearer ${auth?.accessToken}`;
                 }
-                config.url += (config.url.indexOf('?') === -1)? '?' : '&';
-                config.url += 'token=' + auth?.accessToken;
+                if (config.url.indexOf('token=') === -1) {
+                    config.url += (config.url.indexOf('?') === -1)? '?' : '&';
+                    config.url += 'token=' + auth?.accessToken;
+                }
                 return config;
             }, (error) => Promise.reject(error)
         );

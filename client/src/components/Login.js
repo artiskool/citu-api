@@ -6,8 +6,7 @@ import axios from '../api/axios';
 const LOGIN_URL = '/login';
 
 const Login = () => {
-    const { setAuth, keepLogin } = useAuth();
-
+    const { auth, setAuth, keepLogin } = useAuth();
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || "/";
@@ -20,6 +19,9 @@ const Login = () => {
     const [errMsg, setErrMsg] = useState('');
 
     useEffect(() => {
+        if (auth?.accessToken) {
+            navigate(from, { replace: true });
+        }
         userRef.current.focus();
     }, [])
 

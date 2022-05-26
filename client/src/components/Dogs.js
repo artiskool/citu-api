@@ -7,26 +7,23 @@ const Dogs = () => {
     const axiosPrivate = useAxiosPrivate();
     const navigate = useNavigate();
     const location = useLocation();
-    let url = '/dogs/?limit=10&offset=0';
 
-    useEffect(() => {
-        let isMounted = true;
-        const controller = new AbortController();
-        const getDogs = async () => {
-            try {
-                const response = await axiosPrivate.get(url, {
-                    signal: controller.signal
-                });
-                console.log(response.data);
-                isMounted && setDogs(response.data);
-            } catch (err) {
-                console.error(err);
-                navigate('/login', { state: { from: location }, replace: true });
-            }
+    const getDogs = async (url, options) => {
+        try {
+            const response = await axiosPrivate.get(url, options);
+            console.log(response.data);
+            setDogs(response.data);
+        } catch (err) {
+            console.error(err);
+            navigate('/login', { state: { from: location }, replace: true });
         }
-        getDogs();
+    }
+    useEffect(() => {
+        const controller = new AbortController();
+        getDogs('/dogs/?limit=3&offset=0', {
+            signal: controller.signal
+        });
         return () => {
-            isMounted = false;
             controller.abort();
         }
     }, []);
@@ -34,11 +31,9 @@ const Dogs = () => {
     const paginationHandler = (e) => {
         e.preventDefault();
         const name = e.target.getAttribute('data-name');
-        alert('clicked: ' + name);
         if (name in dogs?.metadata?.links) {
-            url = dogs.metadata.links[name];
-            alert(url);
-            //getDogs();
+            const url = dogs.metadata.links[name];
+            getDogs(url);
         }
     }
     return (
@@ -47,30 +42,34 @@ const Dogs = () => {
             {dogs?.data?.length
                 ? (
                     <>
-                    <ul>
+                    <table border="1" cellpading="5" cellspacing="5">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
                     {
                         dogs.data.map((dog, i) =>
-                            <li key={dog?.id}>
-                                {dog?.name}
-                                <a href=""> View </a> |
-                                <a href=""> Edit </a> |
-                                <a href=""> Delete </a>
-                            </li>
+                            <tr key={dog.id}>
+                                <td>{dog.id}</td>
+                                <td>{dog.name}</td>
+                                <td>
+                                    <a href=""> View </a> |
+                                    <a href=""> Edit </a> |
+                                    <a href=""> Delete </a>
+                                </td>
+                            </tr>
                         )
                     }
-                    </ul>
-                    {dogs?.metadata?.links?.start ? 
+                        </tbody>
+                    </table>
+                    {dogs?.metadata?.links?.previous ? 
                         <a
                             href="#"
-                            data-name="start"
-                            onClick={paginationHandler}
-                        > &laquo;Start </a>
-                        : ''
-                    }
-                    {dogs?.metadata?.links?.prev ? 
-                        <a
-                            href="#"
-                            data-name="prev"
+                            data-name="previous"
                             onClick={paginationHandler}
                         > &lsaquo;Previous </a>
                         : ''
@@ -81,14 +80,6 @@ const Dogs = () => {
                             data-name="next"
                             onClick={paginationHandler}
                         > Next&rsaquo; </a>
-                        : ''
-                    }
-                    {dogs?.metadata?.links?.last ? 
-                        <a
-                            href="#"
-                            data-name="last"
-                            onClick={paginationHandler}
-                        > Last&raquo; </a>
                         : ''
                     }
                     </>
