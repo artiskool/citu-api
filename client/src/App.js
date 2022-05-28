@@ -3,13 +3,18 @@ import Login from './components/Login';
 import Home from './components/Home';
 import Layout from './components/Layout';
 import Dogs from './components/Dogs';
+import DogsAdd from './components/DogAdd';
+import DogsDelete from './components/DogDelete';
 import Admin from './components/Admin';
 import Missing from './components/Missing';
 import Unauthorized from './components/Unauthorized';
 import Lounge from './components/Lounge';
 import LinkPage from './components/LinkPage';
 import RequireAuth from './components/RequireAuth';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import useAxiosPrivate from './hooks/useAxiosPrivate';
+
 
 const ROLES = {
   'User': 2001,
@@ -18,6 +23,46 @@ const ROLES = {
 }
 
 function App() {
+  const [dogs, setDogs] = useState();
+  const [url, setUrl] = useState('/dogs/?limit=3&offset=0');
+  const axiosPrivate = useAxiosPrivate();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const getDogs = async (url, options = null) => {
+    setUrl(url);
+      try {
+          const response = await axiosPrivate.get(url, options);
+          console.log(response.data);
+          setDogs(response.data);
+      } catch (err) {
+          console.error(err);
+          navigate('/login', { state: { from: location }, replace: true });
+      }
+  }
+  useEffect(() => {
+      const controller = new AbortController();
+    getDogs(url, {
+          signal: controller.signal
+      });
+      return () => {
+          controller.abort();
+      }
+  }, []);
+
+  const dogDelHandler = async (dog) => {
+    console.log('DOG to be deleted: ', dog.id);
+    const response = await axiosPrivate.delete(`/dogs/${dog.id}`);
+    console.log(response.data);
+    getDogs(url);
+  }
+
+  const dogAddHandler = async (dog) => {
+    console.log('DOG: ', dog);
+    const response = await axiosPrivate.post('/dogs/', JSON.stringify(dog));
+    console.log(response.data);
+    getDogs(url);
+  }
 
   return (
     <Routes>
@@ -34,9 +79,16 @@ function App() {
         </Route>
 
         <Route element={<RequireAuth allowedRoles={[ROLES.Editor]} />}>
-          <Route path="dogs" element={<Dogs />} />
+          <Route path="dogs" element={<Dogs dogs={dogs} getDogs={getDogs} />} />
+          <Route path="dogs/new" element={<DogsAdd addHandler={dogAddHandler} />} />
+          {/* <Route path="dogs/view/:id" element={<DogsView />} /> */}
+          <Route path="dogs/delete/:id" element={<DogsDelete delHandler={dogDelHandler} />} />
         </Route>
 
+        {/* <Route element={<RequireAuth allowedRoles={[ROLES.Editor]} />}>
+          <Route path="dogs/delete" element={<Dogs />} />
+        </Route> */}
+        
 
         <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
           <Route path="admin" element={<Admin />} />
