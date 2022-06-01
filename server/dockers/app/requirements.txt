@@ -3,3 +3,4 @@ Flask==2.1.1
 Flask-MySQL==1.5.2
 PyMySQL==1.0.2
 PyJWT==2.4.0
+Flask-Cors==1.10.3
