@@ -2,7 +2,7 @@
 
 
 ### Get all dogs
-GET {{host}}/?fields=name&offset=0&limit=3&token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWQiOjEwMCwiZXhwIjoxNjUzODE5ODUxfQ.pUHBVH9BFwC2c9OxWuyG1lg82sSqvjtIq9IbrKX3-xQ HTTP/1.1
+GET {{host}}/?fields=name&offset=0&limit=3&token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWQiOjEwMCwiZXhwIjoxNjU0MTYxMzAyfQ.jDXSTaJG5d1YbHF3YuTqgu2l2kbRLdUA9XE273hJ93E HTTP/1.1
 
 
 ### Create new dogs

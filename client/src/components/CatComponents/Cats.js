@@ -1,21 +1,20 @@
 import { Link } from 'react-router-dom';
-import DogCard from "./DogCard";
+import CatCard from "./CatCard";
 
-const Dogs = ({dogs, getDogs}) => {
+const Cats = ({cats, getCats}) => {
     const paginationHandler = (e) => {
         e.preventDefault();
         const name = e.target.getAttribute('data-name');
-        if (name in dogs?.metadata?.links) {
-            const url = dogs.metadata.links[name];
-            getDogs(url);
+        if (name in cats?.metadata?.links) {
+            const url = cats.metadata.links[name];
+            getCats(url);
         }
     }
-
     return (
         <article>
             <Link to="/">Return to Home</Link>
-            <h2>Dogs List (<Link to="/dogs/new">Create</Link>) </h2>
-            {dogs?.data?.length
+            <h2>Cats List (<Link to ="/cats/new">Create</Link>)</h2>
+            {cats?.data?.length
                 ? (
                     <>
                     <table border="1" cellpading="5" cellSpacing="5">
@@ -28,13 +27,13 @@ const Dogs = ({dogs, getDogs}) => {
                         </thead>
                         <tbody>
                     {
-                        dogs.data.map((dog, i) =>
-                            <DogCard dog={dog}/>
+                        cats.data.map((cat, i) =>
+                            <CatCard cat={cat}/>
                         )
                     }
                         </tbody>
                     </table>
-                    {dogs?.metadata?.links?.prev ? 
+                    {cats?.metadata?.links?.prev ? 
                         <a
                             href="#"
                             data-name="prev"
@@ -42,7 +41,7 @@ const Dogs = ({dogs, getDogs}) => {
                         > &lsaquo;Previous  </a>
                         : ''
                     }
-                    {dogs?.metadata?.links?.next ? 
+                    {cats?.metadata?.links?.next ? 
                         <a
                             href="#"
                             data-name="next"
@@ -51,10 +50,10 @@ const Dogs = ({dogs, getDogs}) => {
                         : ''
                     }
                     </>
-                ) : <p>No dogs to display</p>
+                ) : <p>No cats to display</p>
             }
         </article>
     );
 };
 
-export default Dogs;
+export default Cats;

@@ -1,10 +1,14 @@
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, useLinkClickHandler } from "react-router-dom";
 import { useContext } from "react";
 import AuthContext from "../context/AuthProvider";
 
-const Home = () => {
+const Home = ({GetLoad}) => {
     const { setAuth, keepLogin } = useContext(AuthContext);
     const navigate = useNavigate();
+
+    const handlerPet = (e) => {
+        GetLoad(e);
+    }
 
     const logout = async () => {
         // if used in more components, this should be in context 
@@ -20,7 +24,8 @@ const Home = () => {
             <br />
             <p>You are logged in!</p>
             <br />
-            <Link to="/dogs">Go to the Dogs page</Link>
+            <Link to="/dogs" onClick={() => handlerPet("dog")}>Go to the Dogs page</Link>
+            <Link to="/cats" onClick={() => handlerPet("cat")}>Go to the Cats page</Link>
             <br />
             <div className="flexGrow">
                 <button onClick={logout}>Sign Out</button>
