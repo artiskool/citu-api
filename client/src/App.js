@@ -2,9 +2,9 @@ import Register from './components/Register';
 import Login from './components/Login';
 import Home from './components/Home';
 import Layout from './components/Layout';
-import Dogs from './components/Dogs';
-import DogsAdd from './components/DogAdd';
-import DogsDelete from './components/DogDelete';
+import Dogs from './components/DogComponents/Dogs';
+import DogsAdd from './components/DogComponents/DogAdd';
+import DogsDelete from './components/DogComponents/DogDelete';
 import Admin from './components/Admin';
 import Missing from './components/Missing';
 import Unauthorized from './components/Unauthorized';
@@ -14,7 +14,9 @@ import RequireAuth from './components/RequireAuth';
 import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import useAxiosPrivate from './hooks/useAxiosPrivate';
-
+import DogAdd from './components/DogComponents/DogAdd';
+import DogDetail from './components/DogComponents/DogDetail';
+import DogEdit from './components/DogComponents/DogEdit';
 
 const ROLES = {
   'User': 2001,
@@ -64,6 +66,21 @@ function App() {
     getDogs(url);
   }
 
+  useEffect(() => {
+      const controller = new AbortController();
+      getDogs(url, {
+          signal: controller.signal
+      });
+      return () => {
+          controller.abort();
+      }
+  }, []);
+  const dogUpdateHandler = async (dog) => {
+    console.log('DOG: ', dog);
+    const response = await axiosPrivate.put('/dogs/', JSON.stringify(dog));
+    console.log(response.data);
+    getDogs(url);
+  }
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
@@ -83,6 +100,8 @@ function App() {
           <Route path="dogs/new" element={<DogsAdd addHandler={dogAddHandler} />} />
           {/* <Route path="dogs/view/:id" element={<DogsView />} /> */}
           <Route path="dogs/delete/:id" element={<DogsDelete delHandler={dogDelHandler} />} />
+          <Route path="dogs/view/:id" element={<DogDetail />} />
+          <Route path="dogs/edit/:id" element={<DogEdit updateHandler={dogUpdateHandler} />} />
         </Route>
 
         {/* <Route element={<RequireAuth allowedRoles={[ROLES.Editor]} />}>

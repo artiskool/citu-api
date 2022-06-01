@@ -1,5 +1,3 @@
-import { useState, useEffect } from "react";
-import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import { useNavigate, useLocation, Navigate } from "react-router-dom";
 
 const DogDelete = ({ delHandler }) => {

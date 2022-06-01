@@ -26,10 +26,10 @@ Content-Type: application/json
 
 
 ### Delete dogs
-DELETE {{host}}/ HTTP/1.1
+DELETE {{host}}/?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWQiOjEwMCwiZXhwIjoxNjUzNjc0OTI3fQ.--EvNx1sqeODptZwkISe1_tB9j_81WfjNF0gFYkBuWw HTTP/1.1
 Content-Type: application/json
 
-[21,23,12,16,17]
+[49]
 
 
 
