@@ -2,9 +2,9 @@ import Register from './components/Register';
 import Login from './components/Login';
 import Home from './components/Home';
 import Layout from './components/Layout';
-import Dogs from './components/Dogs';
-import DogsAdd from './components/DogAdd';
-import DogsDelete from './components/DogDelete';
+import Dogs from './components/DogComponents/Dogs';
+import DogsAdd from './components/DogComponents/DogAdd';
+import DogsDelete from './components/DogComponents/DogDelete';
 import Admin from './components/Admin';
 import Missing from './components/Missing';
 import Unauthorized from './components/Unauthorized';
@@ -14,9 +14,9 @@ import RequireAuth from './components/RequireAuth';
 import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import useAxiosPrivate from './hooks/useAxiosPrivate';
-import DogAdd from './components/DogAdd';
-import DogDetail from './components/DogDetail';
-import DogEdit from './components/DogEdit';
+import DogAdd from './components/DogComponents/DogAdd';
+import DogDetail from './components/DogComponents/DogDetail';
+import DogEdit from './components/DogComponents/DogEdit';
 
 const ROLES = {
   'User': 2001,
@@ -25,7 +25,7 @@ const ROLES = {
 }
 
 function App() {
-  const [dogs, setDogs] = useState([]);
+  const [dogs, setDogs] = useState();
   const [url, setUrl] = useState('/dogs/?limit=3&offset=0');
   const axiosPrivate = useAxiosPrivate();
   const navigate = useNavigate();

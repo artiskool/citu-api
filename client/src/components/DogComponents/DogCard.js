@@ -8,7 +8,7 @@ const DogCard = ({dog}) => {
             <td>
                 <Link to={`/dogs/view/${dog.id}`} state={{dog}}> View </Link> |
                 <Link to={`/dogs/edit/${dog.id}`} state={{dog}}> Edit </Link> |
-                <a href=""> Delete </a>
+                <Link to={`/dogs/delete/${dog.id}`} state={{dog}}> Delete </Link>
             </td>
         </tr>
     );
