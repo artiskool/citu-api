@@ -1,8 +1,16 @@
+<<<<<<< HEAD
 import DogCard from "./DogCard";
 import { Link } from 'react-router-dom';
 
 const Dogs = ({ dogs, getDogs }) => {
   const paginationHandler = (e) => {
+=======
+import { Link } from 'react-router-dom';
+import DogCard from "./DogCard";
+
+const Dogs = ({dogs, getDogs}) => {
+    const paginationHandler = (e) => {
+>>>>>>> e62d4a40cb3553b0d6e17fd2c5ad1f90d9e9d708
         e.preventDefault();
         const name = e.target.getAttribute('data-name');
         if (name in dogs?.metadata?.links) {
@@ -12,7 +20,11 @@ const Dogs = ({ dogs, getDogs }) => {
     }
     return (
         <article>
+<<<<<<< HEAD
             <h2>Dogs List (<Link to ="/dogs/new">Create</Link>)</h2>
+=======
+            <h2>Dogs List (<Link to="/dogs/create">Create</Link>)</h2>
+>>>>>>> e62d4a40cb3553b0d6e17fd2c5ad1f90d9e9d708
             {dogs?.data?.length
                 ? (
                     <>
@@ -27,7 +39,11 @@ const Dogs = ({ dogs, getDogs }) => {
                         <tbody>
                     {
                         dogs.data.map((dog, i) =>
+<<<<<<< HEAD
                             <DogCard dog={dog}/>
+=======
+                            <DogCard dog={dog} />
+>>>>>>> e62d4a40cb3553b0d6e17fd2c5ad1f90d9e9d708
                         )
                     }
                         </tbody>

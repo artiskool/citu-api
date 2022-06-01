@@ -6,12 +6,20 @@ GET {{host}}/?fields=name&offset=0&limit=3&token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI
 
 
 ### Create new dogs
+<<<<<<< HEAD
 POST {{host}}/?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWQiOjEwMCwiZXhwIjoxNjUzODE5ODUxfQ.pUHBVH9BFwC2c9OxWuyG1lg82sSqvjtIq9IbrKX3-xQ HTTP/1.1
+=======
+POST {{host}}/?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWQiOjEwMCwiZXhwIjoxNjUzNzEwNzM2fQ.BiHhHGRIAm7pqko8cTsVgyraftw0iCSmiw3W8Y3Tm5U HTTP/1.1
+>>>>>>> e62d4a40cb3553b0d6e17fd2c5ad1f90d9e9d708
 Content-Type: application/json
 
 {
     "id": 0,
+<<<<<<< HEAD
     "name": "Blackie15"
+=======
+    "name": "123"
+>>>>>>> e62d4a40cb3553b0d6e17fd2c5ad1f90d9e9d708
 }
 
 
@@ -26,10 +34,10 @@ Content-Type: application/json
 
 
 ### Delete dogs
-DELETE {{host}}/ HTTP/1.1
+DELETE {{host}}/?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWQiOjEwMCwiZXhwIjoxNjUzNjc0OTI3fQ.--EvNx1sqeODptZwkISe1_tB9j_81WfjNF0gFYkBuWw HTTP/1.1
 Content-Type: application/json
 
-[21,23,12,16,17]
+[49]
 
 
 
