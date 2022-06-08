@@ -9,6 +9,13 @@ CREATE TABLE dogs(
     INDEX (name)
 );
 
+CREATE TABLE cats(
+    id INT NOT NULL AUTO_INCREMENT,
+    name VARCHAR(200) NOT NULL,
+    PRIMARY KEY (id),
+    INDEX (name)
+);
+
 CREATE TABLE users(
     id INT NOT NULL AUTO_INCREMENT,
     username VARCHAR(200) NOT NULL,

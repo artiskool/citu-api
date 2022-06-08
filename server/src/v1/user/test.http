@@ -1,10 +1,10 @@
 @host = http://127.0.0.1:6000/v1/users
 
-GET {{host}}/?fields=name&offset=0&limit=2 HTTP/1.1
+GET {{host}}/?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWQiOjEwMCwiZXhwIjoxNjUzMDU1Njc3fQ.sWH4uAz01LtPqYfY0-LLN5DAQ6TWMTKJuVrFY8CfcoQ HTTP/1.1
 
 
 ### Create
-POST {{host}}/ HTTP/1.1
+POST {{host}}/?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWQiOjEwMCwiZXhwIjoxNjUzMDU1Njc3fQ.sWH4uAz01LtPqYfY0-LLN5DAQ6TWMTKJuVrFY8CfcoQ HTTP/1.1
 Content-Type: application/json
 
 {

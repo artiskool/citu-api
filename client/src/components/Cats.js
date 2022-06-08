@@ -1,33 +1,9 @@
-import { useState, useEffect } from "react";
-import useAxiosPrivate from "../hooks/useAxiosPrivate";
-import { useNavigate, useLocation } from "react-router-dom";
-const Cats = () => {
-    const [cats, setCats] = useState();
-    const axiosPrivate = useAxiosPrivate();
-    const navigate = useNavigate();
-    const location = useLocation();
+import CatCard from "./CatCard";
+import { Link } from 'react-router-dom';
 
-    const getCats = async (url, options) => {
-        try {
-            const response = await axiosPrivate.get(url, options);
-            console.log(response.data);
-            setCats(response.data);
-        } catch (err) {
-            console.error(err);
-            navigate('/login', { state: { from: location }, replace: true });
-        }
-    }
-    useEffect(() => {
-        const controller = new AbortController();
-        getCats('/cats/?limit=3&offset=0', {
-            signal: controller.signal
-        });
-        return () => {
-            controller.abort();
-        }
-    }, []);
-
+const Cats = ({cats, getCats}) => {
     const paginationHandler = (e) => {
+        
         e.preventDefault();
         const name = e.target.getAttribute('data-name');
         if (name in cats?.metadata?.links) {
@@ -37,11 +13,11 @@ const Cats = () => {
     }
     return (
         <article>
-            <h2>Cats List</h2>
+            <h2>Cats List(<Link to ="/cats/create">Create</Link>)</h2>
             {cats?.data?.length
                 ? (
                     <>
-                    <table border="2" cellPadding={5} cellSpacing={5}>
+                    <table border="1" cellpading="5" cellSpacing="5">
                         <thead>
                             <tr>
                                 <th>ID</th>
@@ -52,15 +28,7 @@ const Cats = () => {
                         <tbody>
                     {
                         cats.data.map((cat, i) =>
-                            <tr key={cat.id}>
-                                <td>{cat.id}</td>
-                                <td>{cat.name}</td>
-                                <td>
-                                    <a href=""> View </a> |
-                                    <a href=""> Edit </a> |
-                                    <a href=""> Delete </a>
-                                </td>
-                            </tr>
+                            <CatCard cat={cat} />
                         )
                     }
                         </tbody>

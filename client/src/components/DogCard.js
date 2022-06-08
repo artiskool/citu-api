@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const DogCard = ({dog}) => {
     return (
-        <tr key={dog.id}>
+        <tr>
             <td>{dog.id}</td>
             <td>{dog.name}</td>
             <td>
