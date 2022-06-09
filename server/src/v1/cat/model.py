@@ -2,8 +2,6 @@ from db import Db
 
 class CatModel():
     def sanitize(self, cats):
-        if not isinstance(cats, (list, tuple)):
-            cats = [cats]
         clean_cats = []
         for cat in cats:
             if not isinstance(cat, dict):
@@ -21,13 +19,13 @@ class CatModel():
             return False
         queries = []
         for cat in clean_cats:
-            sql = "INSERT INTO cats(name) VALUES(%s)"
-            queries.append({"sql": sql, "bind": cat['name']})
+            sql = "INSERT INTO cats(name) VALUES (%s)"
+            queries.append({'sql':sql, 'bind': cat['name']})
         db = Db.get_instance()
         result = db.transactional(queries)
         return cats
 
-    def read(self, filters=None, count_only=False):
+    def read(self, filters = None, count_only = False):
         db = Db.get_instance()
         fields = ['*']
         offset = 0
@@ -52,6 +50,7 @@ class CatModel():
         sql = "SELECT " + cols + " FROM cats"
         if not count_only:
             sql += " ORDER BY name LIMIT " + str(offset) + ", " + str(limit)
+        db.connect().ping()
         if count_only:
             row = db.fetchone(sql)
             return row['total'] if row else 0
@@ -67,7 +66,7 @@ class CatModel():
         queries = []
         for cat in clean_cats:
             sql = "UPDATE cats SET name = %s WHERE id = %s"
-            queries.append({"sql": sql, "bind": (cat['name'], cat['id'])})
+            queries.append({'sql':sql, 'bind': (cat['name'], cat['id'])})
         db = Db.get_instance()
         db.transactional(queries)
         return cats
@@ -81,7 +80,7 @@ class CatModel():
         for cat in cats:
             placeholder.append('%s')
         sql = "DELETE FROM cats WHERE id IN (" + ", ".join(placeholder) + ")"
-        queries.append({"sql": sql, "bind": cats})
+        queries.append({'sql': sql, 'bind': cats})
         db = Db.get_instance()
         counter = db.transactional(queries)
         return counter
